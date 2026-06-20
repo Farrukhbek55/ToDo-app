@@ -1,0 +1,41 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository ni yuklab olish
+        uses: actions/checkout@v4
+
+      - name: Python o'rnatish
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Java o'rnatish (Android build uchun kerak)
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Flet va flet-cli o'rnatish
+        run: |
+          pip install flet==0.28.3
+          pip install flet-cli==0.28.3
+
+      - name: APK build qilish
+        run: |
+          flet build apk --verbose
+
+      - name: APK faylni saqlash (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: doit-apk
+          path: build/apk/*.apk
+          retention-days: 30
