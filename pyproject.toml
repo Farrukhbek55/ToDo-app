@@ -15,5 +15,14 @@ company = "DoIt Team"
 [tool.flet.app]
 path = "."
 
+[tool.flet.splash]
+color = "#0F0F1A"
+dark_color = "#0F0F1A"
+
+[tool.flet.android.splash]
+color = "#0F0F1A"
+dark_color = "#0F0F1A"
+android12 = true
+
 [tool.flet.android]
 permissions = ["android.permission.INTERNET"]
