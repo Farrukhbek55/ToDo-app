@@ -16,8 +16,8 @@ DIVIDER_COLOR  = "#2D2D44"
 YELLOW         = "#F59E0B"
 ORANGE         = "#F97316"
 
-SAVE_FILE  = os.path.join(os.path.expanduser("~"), "doit_tasks.json")
-STATS_FILE = os.path.join(os.path.expanduser("~"), "doit_stats.json")
+CK_TASKS = "doit_tasks"
+CK_STATS = "doit_stats"
 
 CATEGORIES = {
     "Umumiy":  "📋",
@@ -59,23 +59,22 @@ def make_border(color):
     s = ft.BorderSide(1, color)
     return ft.Border(top=s, bottom=s, left=s, right=s)
 
-def load_tasks():
+def load_tasks(page):
     try:
-        if os.path.exists(SAVE_FILE):
-            with open(SAVE_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+        data = page.client_storage.get(CK_TASKS)
+        if data:
+            return data
     except Exception:
         pass
     return []
 
-def save_tasks(data):
+def save_tasks(page, data):
     try:
-        with open(SAVE_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+        page.client_storage.set(CK_TASKS, data)
     except Exception:
         pass
 
-def load_stats():
+def load_stats(page):
     default = {
         "xp": 0,
         "total_done": 0,
@@ -84,21 +83,20 @@ def load_stats():
         "achievements": [],
     }
     try:
-        if os.path.exists(STATS_FILE):
-            with open(STATS_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                for k, v in default.items():
-                    if k not in data:
-                        data[k] = v
-                return data
+        raw = page.client_storage.get(CK_STATS)
+        if raw:
+            data = raw
+            for k, v in default.items():
+                if k not in data:
+                    data[k] = v
+            return data
     except Exception:
         pass
     return default
 
-def save_stats(data):
+def save_stats(page, data):
     try:
-        with open(STATS_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+        page.client_storage.set(CK_STATS, data)
     except Exception:
         pass
 
@@ -273,7 +271,7 @@ def main(page: ft.Page):
     page.window.width  = 420
     page.window.height = 760
 
-    stats      = load_stats()
+    stats      = load_stats(page)
     stats      = update_streak(stats)
     tasks_list = ft.Column(spacing=10)
 
@@ -373,27 +371,24 @@ def main(page: ft.Page):
             stats["xp"]         += xp_gain
             stats["total_done"] += 1
         new_ach = check_achievements()
-        save_stats(stats)
+        save_stats(page, stats)
         refresh_stats_ui()
         for ach in new_ach:
             show_achievement(ach)
 
     # ── Tema tizimi ─────────────────────────────────────────
-    THEME_FILE = os.path.join(os.path.expanduser("~"), "doit_theme.json")
-
     def load_theme():
         try:
-            if os.path.exists(THEME_FILE):
-                with open(THEME_FILE, "r", encoding="utf-8") as f:
-                    return json.load(f).get("dark", True)
+            data = page.client_storage.get("doit_theme")
+            if data is not None:
+                return data.get("dark", True)
         except Exception:
             pass
         return True
 
     def save_theme(dark):
         try:
-            with open(THEME_FILE, "w", encoding="utf-8") as f:
-                json.dump({"dark": dark}, f)
+            page.client_storage.set("doit_theme", {"dark": dark})
         except Exception:
             pass
 
@@ -529,7 +524,7 @@ def main(page: ft.Page):
         done_text.update()
 
     def persist(priority=None):
-        save_tasks([t.to_dict() for t in tasks_list.controls])
+        save_tasks(page, [t.to_dict() for t in tasks_list.controls])
         update_stats_data(priority)
         update_counts()
         try:
@@ -539,7 +534,7 @@ def main(page: ft.Page):
 
     def delete_task(task):
         tasks_list.controls.remove(task)
-        save_tasks([t.to_dict() for t in tasks_list.controls])
+        save_tasks(page, [t.to_dict() for t in tasks_list.controls])
         update_counts()
         page.update()
 
@@ -591,7 +586,7 @@ def main(page: ft.Page):
         tasks_list.controls.insert(0, new_task)
         form_panel.visible = False
         form_panel.update()
-        save_tasks([t.to_dict() for t in tasks_list.controls])
+        save_tasks(page, [t.to_dict() for t in tasks_list.controls])
         update_counts()
         page.update()
 
@@ -872,23 +867,21 @@ def main(page: ft.Page):
     )
 
     # ── Kunlik maqsad ──────────────────────────────────────
-    GOAL_FILE = os.path.join(os.path.expanduser("~"), "doit_goal.json")
-
     def load_goal():
         try:
-            if os.path.exists(GOAL_FILE):
-                with open(GOAL_FILE, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    if data.get("date") == date.today().isoformat():
-                        return data
+            data = page.client_storage.get("doit_goal")
+            if data is not None and data.get("date") == date.today().isoformat():
+                return data
         except Exception:
             pass
         return {"date": date.today().isoformat(), "goal": 5}
 
     def save_goal(goal_num):
         try:
-            with open(GOAL_FILE, "w", encoding="utf-8") as f:
-                json.dump({"date": date.today().isoformat(), "goal": goal_num}, f)
+            page.client_storage.set(
+                "doit_goal",
+                {"date": date.today().isoformat(), "goal": goal_num},
+            )
         except Exception:
             pass
 
@@ -1057,7 +1050,7 @@ def main(page: ft.Page):
         )
     )
 
-    for item in load_tasks():
+    for item in load_tasks(page):
         t = Task(
             task_name   = item["name"],
             task_delete = delete_task,
