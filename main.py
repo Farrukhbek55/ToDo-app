@@ -37,23 +37,228 @@ PRIORITIES = {
 XP_PER_TASK     = 10
 XP_PER_PRIORITY = {"Oddiy": 10, "Ortacha": 20, "Yuqori": 35}
 
-LEVELS = [
-    (0,    "🌱 Yangi boshlovchi"),
-    (100,  "⚡ Faol foydalanuvchi"),
-    (300,  "🔥 Ishbilarmon"),
-    (600,  "💎 Ustoz"),
-    (1000, "🏆 Chempion"),
-    (2000, "🌟 Afsonaviy"),
-]
+LEVEL_THRESHOLDS = [0, 100, 300, 600, 1000, 2000]
 
 ACHIEVEMENTS = [
-    {"id": "first",    "icon": "🎯", "name": "Birinchi qadam",   "desc": "Birinchi vazifani bajaring",       "req": 1},
-    {"id": "ten",      "icon": "🔟", "name": "O'nta bajardim",   "desc": "10 ta vazifani bajaring",          "req": 10},
-    {"id": "fifty",    "icon": "💪", "name": "Qo'l keldi",       "desc": "50 ta vazifani bajaring",          "req": 50},
-    {"id": "streak3",  "icon": "🔥", "name": "3 kunlik olov",    "desc": "3 kun ketma-ket foydalaning",      "req": 3},
-    {"id": "streak7",  "icon": "⚡", "name": "Haftalik chempion","desc": "7 kun ketma-ket foydalaning",      "req": 7},
-    {"id": "streak30", "icon": "👑", "name": "Oylik shoh",       "desc": "30 kun ketma-ket foydalaning",     "req": 30},
+    {"id": "first",    "icon": "🎯", "req": 1},
+    {"id": "ten",      "icon": "🔟", "req": 10},
+    {"id": "fifty",    "icon": "💪", "req": 50},
+    {"id": "streak3",  "icon": "🔥", "req": 3},
+    {"id": "streak7",  "icon": "⚡", "req": 7},
+    {"id": "streak30", "icon": "👑", "req": 30},
 ]
+
+# ═══════════════════════════════════════════════════════════
+# TARJIMA TIZIMI (i18n)
+# ═══════════════════════════════════════════════════════════
+LANGUAGES = {"uz": "O'zbekcha", "ru": "Русский", "en": "English"}
+
+TR = {
+    "uz": {
+        "app_title": "DoIt",
+        "tasks_count": "{n} ta vazifa",
+        "done_count": "✓ {n} bajarildi",
+        "filter_all": "Hammasi",
+        "filter_active": "Aktiv",
+        "filter_done": "Bajarilgan",
+        "add_task_btn": "Yangi vazifa qo'shish",
+        "search_hint": "Vazifa qidiring...",
+        "new_task_title": "Yangi vazifa",
+        "task_name_hint": "Vazifa nomi...",
+        "category_label": "Kategoriya",
+        "priority_label": "Muhimlik",
+        "due_label": "Muddat (ixtiyoriy)",
+        "due_not_set": "Sana tanlanmagan",
+        "cancel_btn": "Bekor",
+        "add_btn": "✓ Qo'shish",
+        "name_required": "Vazifa nomini kiriting!",
+        "achievements_title": "Yutuqlar",
+        "achievements_count": "Yutuqlar ({done}/{total})",
+        "total_xp": "Jami XP",
+        "streak_label": "Streak",
+        "completed_label": "Bajarildi",
+        "goal_title": "🎯 Kunlik maqsad",
+        "goal_label": "Maqsad: {n} ta",
+        "goal_done": "✅ {done}/{goal} ta bajarildi",
+        "goal_reached": "🎉 Maqsadga yetdingiz!",
+        "goal_remaining": "{n} ta qoldi",
+        "overdue": "⚠ {n}k o'tdi",
+        "due_today": "⏰ Bugun",
+        "due_tomorrow": "📅 Ertaga",
+        "theme_tooltip": "Temani o'zgartirish",
+        "search_tooltip": "Qidirish",
+        "lang_tooltip": "Tilni o'zgartirish",
+        "achievements_tooltip": "Yutuqlar",
+        "achievement_unlocked": "🏆 Yutuq ochildi!",
+        "xp_gained": "🎉 +{n} XP oldingiz!",
+        "categories": {
+            "Umumiy": "Umumiy", "Ish": "Ish", "Shaxsiy": "Shaxsiy",
+            "Xarid": "Xarid", "Sogliq": "Sog'liq",
+        },
+        "priorities": {
+            "Oddiy": "Oddiy", "Ortacha": "O'rtacha", "Yuqori": "Yuqori",
+        },
+        "levels": [
+            "🌱 Yangi boshlovchi", "⚡ Faol foydalanuvchi", "🔥 Ishbilarmon",
+            "💎 Ustoz", "🏆 Chempion", "🌟 Afsonaviy",
+        ],
+        "ach_names": {
+            "first": "Birinchi qadam", "ten": "O'nta bajardim", "fifty": "Qo'l keldi",
+            "streak3": "3 kunlik olov", "streak7": "Haftalik chempion", "streak30": "Oylik shoh",
+        },
+        "ach_descs": {
+            "first": "Birinchi vazifani bajaring", "ten": "10 ta vazifani bajaring",
+            "fifty": "50 ta vazifani bajaring", "streak3": "3 kun ketma-ket foydalaning",
+            "streak7": "7 kun ketma-ket foydalaning", "streak30": "30 kun ketma-ket foydalaning",
+        },
+    },
+    "ru": {
+        "app_title": "DoIt",
+        "tasks_count": "{n} задач",
+        "done_count": "✓ {n} выполнено",
+        "filter_all": "Все",
+        "filter_active": "Активные",
+        "filter_done": "Выполненные",
+        "add_task_btn": "Добавить задачу",
+        "search_hint": "Поиск задачи...",
+        "new_task_title": "Новая задача",
+        "task_name_hint": "Название задачи...",
+        "category_label": "Категория",
+        "priority_label": "Приоритет",
+        "due_label": "Срок (необязательно)",
+        "due_not_set": "Дата не выбрана",
+        "cancel_btn": "Отмена",
+        "add_btn": "✓ Добавить",
+        "name_required": "Введите название задачи!",
+        "achievements_title": "Достижения",
+        "achievements_count": "Достижения ({done}/{total})",
+        "total_xp": "Всего XP",
+        "streak_label": "Серия",
+        "completed_label": "Выполнено",
+        "goal_title": "🎯 Дневная цель",
+        "goal_label": "Цель: {n}",
+        "goal_done": "✅ {done}/{goal} выполнено",
+        "goal_reached": "🎉 Цель достигнута!",
+        "goal_remaining": "Осталось {n}",
+        "overdue": "⚠ просрочено на {n}д",
+        "due_today": "⏰ Сегодня",
+        "due_tomorrow": "📅 Завтра",
+        "theme_tooltip": "Сменить тему",
+        "search_tooltip": "Поиск",
+        "lang_tooltip": "Сменить язык",
+        "achievements_tooltip": "Достижения",
+        "achievement_unlocked": "🏆 Достижение открыто!",
+        "xp_gained": "🎉 +{n} XP получено!",
+        "categories": {
+            "Umumiy": "Общее", "Ish": "Работа", "Shaxsiy": "Личное",
+            "Xarid": "Покупки", "Sogliq": "Здоровье",
+        },
+        "priorities": {
+            "Oddiy": "Обычный", "Ortacha": "Средний", "Yuqori": "Высокий",
+        },
+        "levels": [
+            "🌱 Новичок", "⚡ Активный пользователь", "🔥 Деловой",
+            "💎 Мастер", "🏆 Чемпион", "🌟 Легенда",
+        ],
+        "ach_names": {
+            "first": "Первый шаг", "ten": "Десять выполнено", "fifty": "Набил руку",
+            "streak3": "Серия 3 дня", "streak7": "Недельный чемпион", "streak30": "Месячный король",
+        },
+        "ach_descs": {
+            "first": "Выполните первую задачу", "ten": "Выполните 10 задач",
+            "fifty": "Выполните 50 задач", "streak3": "Используйте 3 дня подряд",
+            "streak7": "Используйте 7 дней подряд", "streak30": "Используйте 30 дней подряд",
+        },
+    },
+    "en": {
+        "app_title": "DoIt",
+        "tasks_count": "{n} tasks",
+        "done_count": "✓ {n} completed",
+        "filter_all": "All",
+        "filter_active": "Active",
+        "filter_done": "Completed",
+        "add_task_btn": "Add new task",
+        "search_hint": "Search tasks...",
+        "new_task_title": "New task",
+        "task_name_hint": "Task name...",
+        "category_label": "Category",
+        "priority_label": "Priority",
+        "due_label": "Due date (optional)",
+        "due_not_set": "No date selected",
+        "cancel_btn": "Cancel",
+        "add_btn": "✓ Add",
+        "name_required": "Please enter a task name!",
+        "achievements_title": "Achievements",
+        "achievements_count": "Achievements ({done}/{total})",
+        "total_xp": "Total XP",
+        "streak_label": "Streak",
+        "completed_label": "Completed",
+        "goal_title": "🎯 Daily Goal",
+        "goal_label": "Goal: {n}",
+        "goal_done": "✅ {done}/{goal} completed",
+        "goal_reached": "🎉 Goal reached!",
+        "goal_remaining": "{n} left",
+        "overdue": "⚠ {n}d overdue",
+        "due_today": "⏰ Today",
+        "due_tomorrow": "📅 Tomorrow",
+        "theme_tooltip": "Switch theme",
+        "search_tooltip": "Search",
+        "lang_tooltip": "Switch language",
+        "achievements_tooltip": "Achievements",
+        "achievement_unlocked": "🏆 Achievement unlocked!",
+        "xp_gained": "🎉 +{n} XP gained!",
+        "categories": {
+            "Umumiy": "General", "Ish": "Work", "Shaxsiy": "Personal",
+            "Xarid": "Shopping", "Sogliq": "Health",
+        },
+        "priorities": {
+            "Oddiy": "Low", "Ortacha": "Medium", "Yuqori": "High",
+        },
+        "levels": [
+            "🌱 Beginner", "⚡ Active User", "🔥 Go-Getter",
+            "💎 Master", "🏆 Champion", "🌟 Legend",
+        ],
+        "ach_names": {
+            "first": "First Step", "ten": "Ten Done", "fifty": "Getting Good",
+            "streak3": "3-Day Streak", "streak7": "Weekly Champion", "streak30": "Monthly King",
+        },
+        "ach_descs": {
+            "first": "Complete your first task", "ten": "Complete 10 tasks",
+            "fifty": "Complete 50 tasks", "streak3": "Use the app 3 days in a row",
+            "streak7": "Use the app 7 days in a row", "streak30": "Use the app 30 days in a row",
+        },
+    },
+}
+
+def t(lang, key, **kwargs):
+    """Tarjima matnini olish. kwargs orqali {n}, {done} kabi joylar to'ldiriladi."""
+    text = TR.get(lang, TR["uz"]).get(key, key)
+    if kwargs:
+        try:
+            text = text.format(**kwargs)
+        except Exception:
+            pass
+    return text
+
+def t_cat(lang, cat_key):
+    """Kategoriya nomini tarjima qilish (kalit o'zgarmaydi, faqat ko'rinish)"""
+    return TR.get(lang, TR["uz"])["categories"].get(cat_key, cat_key)
+
+def t_pri(lang, pri_key):
+    """Muhimlik nomini tarjima qilish"""
+    return TR.get(lang, TR["uz"])["priorities"].get(pri_key, pri_key)
+
+def t_level(lang, index):
+    """Daraja nomini tarjima qilish"""
+    levels = TR.get(lang, TR["uz"])["levels"]
+    return levels[min(index, len(levels) - 1)]
+
+def t_ach_name(lang, ach_id):
+    return TR.get(lang, TR["uz"])["ach_names"].get(ach_id, ach_id)
+
+def t_ach_desc(lang, ach_id):
+    return TR.get(lang, TR["uz"])["ach_descs"].get(ach_id, ach_id)
+
 
 def make_border(color):
     s = ft.BorderSide(1, color)
@@ -100,15 +305,16 @@ def save_stats(page, data):
     except Exception:
         pass
 
-def get_level(xp):
-    level_name = LEVELS[0][1]
-    for min_xp, name in LEVELS:
+def get_level_index(xp):
+    """XP ga mos daraja indeksini qaytaradi (0-5)"""
+    idx = 0
+    for i, min_xp in enumerate(LEVEL_THRESHOLDS):
         if xp >= min_xp:
-            level_name = name
-    return level_name
+            idx = i
+    return idx
 
 def get_level_progress(xp):
-    thresholds = [l[0] for l in LEVELS]
+    thresholds = LEVEL_THRESHOLDS
     for i in range(len(thresholds) - 1):
         if xp < thresholds[i + 1]:
             start = thresholds[i]
@@ -141,6 +347,7 @@ class Task(ft.Container):
     def __init__(self, task_name, task_delete, on_change,
                  created_at=None, is_done=False,
                  category="Umumiy", priority="Oddiy", due_date=None,
+                 lang="uz",
         ):
         super().__init__()
         self.task_name   = task_name
@@ -151,6 +358,7 @@ class Task(ft.Container):
         self.category    = category
         self.priority    = priority
         self.due_date    = due_date
+        self.lang        = lang
 
         cat_icon = CATEGORIES.get(self.category, "📋")
         pri      = PRIORITIES.get(self.priority, PRIORITIES["Oddiy"])
@@ -178,11 +386,11 @@ class Task(ft.Container):
 
         tag_controls = [
             ft.Container(
-                content=ft.Text(f"{cat_icon} {self.category}", size=10, color=ACCENT_LIGHT),
+                content=ft.Text(f"{cat_icon} {t_cat(self.lang, self.category)}", size=10, color=ACCENT_LIGHT),
                 bgcolor=ACCENT + "20", border_radius=6, padding=4,
             ),
             ft.Container(
-                content=ft.Text(f"{pri['icon']} {self.priority}", size=10, color=pri["color"]),
+                content=ft.Text(f"{pri['icon']} {t_pri(self.lang, self.priority)}", size=10, color=pri["color"]),
                 bgcolor=pri["color"] + "20", border_radius=6, padding=4,
             ),
         ]
@@ -192,11 +400,11 @@ class Task(ft.Container):
                 due  = datetime.strptime(self.due_date, "%Y-%m-%d").date()
                 diff = (due - date.today()).days
                 if diff < 0:
-                    dc, dl = DELETE_COLOR, f"⚠ {abs(diff)}k o'tdi"
+                    dc, dl = DELETE_COLOR, t(self.lang, "overdue", n=abs(diff))
                 elif diff == 0:
-                    dc, dl = YELLOW, "⏰ Bugun"
+                    dc, dl = YELLOW, t(self.lang, "due_today")
                 elif diff == 1:
-                    dc, dl = YELLOW, "📅 Ertaga"
+                    dc, dl = YELLOW, t(self.lang, "due_tomorrow")
                 else:
                     dc, dl = TEXT_SECONDARY, f"📅 {self.due_date}"
                 tag_controls.append(
@@ -271,15 +479,37 @@ def main(page: ft.Page):
     page.window.width  = 420
     page.window.height = 760
 
+    # ── Til tizimi ───────────────────────────────────────────
+    def load_lang():
+        try:
+            data = page.client_storage.get("doit_lang")
+            if data in TR:
+                return data
+        except Exception:
+            pass
+        return "uz"
+
+    def save_lang(lang_code):
+        try:
+            page.client_storage.set("doit_lang", lang_code)
+        except Exception:
+            pass
+
+    current_lang = [load_lang()]
+
+    def L(key, **kwargs):
+        """Joriy tilda matn olish uchun qisqa nom"""
+        return t(current_lang[0], key, **kwargs)
+
     stats      = load_stats(page)
     stats      = update_streak(stats)
     tasks_list = ft.Column(spacing=10)
 
     # ── Statistika matnlari ─────────────────────────────────
     xp_text      = ft.Text(f"⭐ {stats['xp']} XP", color=YELLOW, size=13, weight=ft.FontWeight.BOLD)
-    level_text   = ft.Text(get_level(stats["xp"]), color=ACCENT_LIGHT, size=12)
-    streak_text  = ft.Text(f"🔥 {stats['streak']} kun streak", color=ORANGE, size=13, weight=ft.FontWeight.BOLD)
-    counter_text = ft.Text("0 ta vazifa", color=TEXT_SECONDARY, size=13)
+    level_text   = ft.Text(t_level(current_lang[0], get_level_index(stats["xp"])), color=ACCENT_LIGHT, size=12)
+    streak_text  = ft.Text(f"🔥 {stats['streak']}", color=ORANGE, size=13, weight=ft.FontWeight.BOLD)
+    counter_text = ft.Text(L("tasks_count", n=0), color=TEXT_SECONDARY, size=13)
     done_text    = ft.Text("", color=DONE_COLOR, size=13)
 
     xp_bar = ft.Container(
@@ -296,8 +526,8 @@ def main(page: ft.Page):
 
     def refresh_stats_ui():
         xp_text.value    = f"⭐ {stats['xp']} XP"
-        level_text.value = get_level(stats["xp"])
-        streak_text.value = f"🔥 {stats['streak']} kun streak"
+        level_text.value = t_level(current_lang[0], get_level_index(stats["xp"]))
+        streak_text.value = f"🔥 {stats['streak']}"
         progress = get_level_progress(stats["xp"])
         xp_bar.content.width = max(4, int(340 * progress))
         xp_text.update()
@@ -329,9 +559,9 @@ def main(page: ft.Page):
                     ft.Text(ach["icon"], size=24),
                     ft.Column(
                         controls=[
-                            ft.Text("🏆 Yutuq ochildi!", color=YELLOW, size=11, weight=ft.FontWeight.BOLD),
-                            ft.Text(ach["name"], color=TEXT_PRIMARY, size=13, weight=ft.FontWeight.BOLD),
-                            ft.Text(ach["desc"], color=TEXT_SECONDARY, size=11),
+                            ft.Text(L("achievement_unlocked"), color=YELLOW, size=11, weight=ft.FontWeight.BOLD),
+                            ft.Text(t_ach_name(current_lang[0], ach["id"]), color=TEXT_PRIMARY, size=13, weight=ft.FontWeight.BOLD),
+                            ft.Text(t_ach_desc(current_lang[0], ach["id"]), color=TEXT_SECONDARY, size=11),
                         ],
                         spacing=2,
                         expand=True,
@@ -403,15 +633,37 @@ def main(page: ft.Page):
     L_TEXT2   = "#64748B"
 
     app_title_text = ft.Text("DoIt", size=26, weight=ft.FontWeight.BOLD, color=TEXT_PRIMARY)
-    ach_title_text = ft.Text("Yutuqlar", size=22, weight=ft.FontWeight.BOLD, color=TEXT_PRIMARY)
+    ach_title_text = ft.Text(L("achievements_title"), size=22, weight=ft.FontWeight.BOLD, color=TEXT_PRIMARY)
     date_text      = ft.Text(datetime.now().strftime("%d %B, %Y"), size=12, color=TEXT_SECONDARY)
 
     theme_icon_btn = ft.IconButton(
         icon=ft.Icons.DARK_MODE_ROUNDED if is_dark[0] else ft.Icons.LIGHT_MODE_ROUNDED,
         icon_color=ACCENT_LIGHT,
         icon_size=22,
-        tooltip="Temani o'zgartirish",
+        tooltip=L("theme_tooltip"),
         on_click=lambda e: safe_toggle_theme(),
+    )
+
+    def change_language(lang_code):
+        current_lang[0] = lang_code
+        save_lang(lang_code)
+        try:
+            refresh_all_text()
+        except Exception as ex:
+            import traceback
+            print("LANG SWITCH ERROR:", ex)
+            traceback.print_exc()
+
+    lang_icon_btn = ft.PopupMenuButton(
+        icon=ft.Icons.LANGUAGE_ROUNDED,
+        icon_color=TEXT_SECONDARY,
+        icon_size=22,
+        tooltip=L("lang_tooltip"),
+        items=[
+            ft.PopupMenuItem(content=ft.Text("O'zbekcha"), on_click=lambda e: change_language("uz")),
+            ft.PopupMenuItem(content=ft.Text("Русский"), on_click=lambda e: change_language("ru")),
+            ft.PopupMenuItem(content=ft.Text("English"), on_click=lambda e: change_language("en")),
+        ],
     )
 
     def safe_toggle_theme():
@@ -518,8 +770,8 @@ def main(page: ft.Page):
     def update_counts():
         total = len(tasks_list.controls)
         done  = sum(1 for t in tasks_list.controls if t.is_done)
-        counter_text.value = f"{total} ta vazifa"
-        done_text.value    = f"✓ {done} bajarildi" if done > 0 else ""
+        counter_text.value = L("tasks_count", n=total)
+        done_text.value    = L("done_count", n=done) if done > 0 else ""
         counter_text.update()
         done_text.update()
 
@@ -540,29 +792,81 @@ def main(page: ft.Page):
 
     # ── Forma maydonlari ────────────────────────────────────
     name_field = ft.TextField(
-        hint_text="Vazifa nomi...",
+        hint_text=L("task_name_hint"),
         hint_style=ft.TextStyle(color=TEXT_SECONDARY),
         color=TEXT_PRIMARY, bgcolor=INPUT_BG,
         border_color=DIVIDER_COLOR, focused_border_color=ACCENT_LIGHT,
         border_radius=10, text_size=14, content_padding=12,
     )
     due_field = ft.TextField(
-        hint_text="Muddat: YYYY-MM-DD (ixtiyoriy)",
+        hint_text=L("due_not_set"),
         hint_style=ft.TextStyle(color=TEXT_SECONDARY),
         color=TEXT_PRIMARY, bgcolor=INPUT_BG,
         border_color=DIVIDER_COLOR, focused_border_color=ACCENT_LIGHT,
         border_radius=10, text_size=13, content_padding=10,
+        read_only=True,
+        expand=True,
+    )
+
+    def on_date_picked(e):
+        try:
+            if date_picker.value:
+                d = date_picker.value
+                # Flet DatePicker mahalliy kunni UTC ga aylantirib yuboradi,
+                # natijada UTC kuni 1 kun orqada chiqadi (masalan 19:00 UTC).
+                # Buni mahalliy taqvim kuniga qaytarish uchun bir kun qo'shamiz.
+                from datetime import timedelta
+                d_fixed = d + timedelta(days=1)
+                due_field.value = f"{d_fixed.year:04d}-{d_fixed.month:02d}-{d_fixed.day:02d}"
+                due_field.update()
+        except Exception as ex:
+            print("DATE PICKER ERROR:", ex)
+
+    date_picker = ft.DatePicker(
+        first_date=date.today(),
+        last_date=date(date.today().year + 2, 12, 31),
+        on_change=on_date_picked,
+    )
+    page.overlay.append(date_picker)
+
+    def open_date_picker(e):
+        date_picker.open = True
+        page.update()
+
+    def clear_due_date(e):
+        due_field.value = ""
+        due_field.update()
+
+    due_field_row = ft.Row(
+        controls=[
+            due_field,
+            ft.IconButton(
+                icon=ft.Icons.CALENDAR_MONTH_ROUNDED,
+                icon_color=ACCENT_LIGHT,
+                icon_size=20,
+                tooltip=L("due_label"),
+                on_click=open_date_picker,
+            ),
+            ft.IconButton(
+                icon=ft.Icons.CLOSE_ROUNDED,
+                icon_color=TEXT_SECONDARY,
+                icon_size=18,
+                tooltip=L("due_not_set"),
+                on_click=clear_due_date,
+            ),
+        ],
+        spacing=4,
     )
     cat_dropdown = ft.Dropdown(
         value="Umumiy",
-        options=[ft.dropdown.Option(k, f"{v} {k}") for k, v in CATEGORIES.items()],
+        options=[ft.dropdown.Option(k, f"{v} {t_cat(current_lang[0], k)}") for k, v in CATEGORIES.items()],
         bgcolor=INPUT_BG, color=TEXT_PRIMARY,
         border_color=DIVIDER_COLOR, focused_border_color=ACCENT_LIGHT,
         border_radius=10, text_size=13, content_padding=10,
     )
     pri_dropdown = ft.Dropdown(
         value="Oddiy",
-        options=[ft.dropdown.Option(k, f"{v['icon']} {k}") for k, v in PRIORITIES.items()],
+        options=[ft.dropdown.Option(k, f"{v['icon']} {t_pri(current_lang[0], k)}") for k, v in PRIORITIES.items()],
         bgcolor=INPUT_BG, color=TEXT_PRIMARY,
         border_color=DIVIDER_COLOR, focused_border_color=ACCENT_LIGHT,
         border_radius=10, text_size=13, content_padding=10,
@@ -571,7 +875,7 @@ def main(page: ft.Page):
     def add_task(e):
         val = name_field.value.strip()
         if not val:
-            name_field.error_text = "Vazifa nomini kiriting!"
+            name_field.error_text = L("name_required")
             name_field.update()
             return
         name_field.error_text = None
@@ -582,6 +886,7 @@ def main(page: ft.Page):
             category    = cat_dropdown.value or "Umumiy",
             priority    = pri_dropdown.value or "Oddiy",
             due_date    = due_field.value.strip() or None,
+            lang        = current_lang[0],
         )
         tasks_list.controls.insert(0, new_task)
         form_panel.visible = False
@@ -602,38 +907,55 @@ def main(page: ft.Page):
         if show:
             name_field.focus()
 
+    form_title_text    = ft.Text(L("new_task_title"), color=TEXT_PRIMARY, size=15, weight=ft.FontWeight.BOLD)
+    form_cat_label      = ft.Text(L("category_label"), color=TEXT_SECONDARY, size=11)
+    form_pri_label      = ft.Text(L("priority_label"), color=TEXT_SECONDARY, size=11)
+    form_due_label      = ft.Text(L("due_label"), color=TEXT_SECONDARY, size=11)
+
+    form_cancel_text = ft.Text(L("cancel_btn"))
+    form_cancel_btn  = ft.TextButton(
+        content=form_cancel_text,
+        on_click=lambda e: toggle_form(False),
+        style=ft.ButtonStyle(color=TEXT_SECONDARY),
+    )
+
+    form_add_text = ft.Text(L("add_btn"))
+    form_add_btn  = ft.ElevatedButton(
+        content=form_add_text,
+        on_click=add_task,
+        bgcolor=ACCENT, color=TEXT_PRIMARY,
+        style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)),
+    )
+
     form_panel = ft.Container(
         visible=False,
         bgcolor=CARD_COLOR, border_radius=16, padding=16,
         border=make_border(ACCENT + "50"),
         content=ft.Column(
             controls=[
-                ft.Text("Yangi vazifa", color=TEXT_PRIMARY, size=15, weight=ft.FontWeight.BOLD),
+                form_title_text,
                 name_field,
                 ft.Row(
                     controls=[
-                        ft.Column(controls=[ft.Text("Kategoriya", color=TEXT_SECONDARY, size=11), cat_dropdown], expand=True, spacing=4),
-                        ft.Column(controls=[ft.Text("Muhimlik", color=TEXT_SECONDARY, size=11), pri_dropdown], expand=True, spacing=4),
+                        ft.Column(controls=[form_cat_label, cat_dropdown], expand=True, spacing=4),
+                        ft.Column(controls=[form_pri_label, pri_dropdown], expand=True, spacing=4),
                     ],
                     spacing=10,
                 ),
-                ft.Text("Muddat (ixtiyoriy)", color=TEXT_SECONDARY, size=11),
-                due_field,
+                form_due_label,
+                due_field_row,
                 ft.Row(
                     controls=[
-                        ft.TextButton("Bekor", on_click=lambda e: toggle_form(False), style=ft.ButtonStyle(color=TEXT_SECONDARY)),
+                        form_cancel_btn,
                         ft.Container(expand=True),
-                        ft.ElevatedButton(
-                            "✓ Qo'shish", on_click=add_task,
-                            bgcolor=ACCENT, color=TEXT_PRIMARY,
-                            style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)),
-                        ),
+                        form_add_btn,
                     ],
                 ),
             ],
             spacing=10,
         ),
     )
+
 
     # ── Yutuqlar ekrani ─────────────────────────────────────
     def show_achievements_screen(e):
@@ -654,9 +976,9 @@ def main(page: ft.Page):
                             ft.Text(ach["icon"] if unlocked else "🔒", size=28),
                             ft.Column(
                                 controls=[
-                                    ft.Text(ach["name"], color=d_text if unlocked else d_sec,
+                                    ft.Text(t_ach_name(current_lang[0], ach["id"]), color=d_text if unlocked else d_sec,
                                             size=14, weight=ft.FontWeight.BOLD),
-                                    ft.Text(ach["desc"], color=d_sec, size=12),
+                                    ft.Text(t_ach_desc(current_lang[0], ach["id"]), color=d_sec, size=12),
                                 ],
                                 spacing=2, expand=True,
                             ),
@@ -696,7 +1018,7 @@ def main(page: ft.Page):
                                         controls=[
                                             ft.Column(
                                                 controls=[
-                                                    ft.Text("Jami XP", color=d_sec, size=11),
+                                                    ft.Text(L("total_xp"), color=d_sec, size=11),
                                                     ft.Text(f"⭐ {stats['xp']}", color=YELLOW, size=20, weight=ft.FontWeight.BOLD),
                                                 ],
                                                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -704,7 +1026,7 @@ def main(page: ft.Page):
                                             ),
                                             ft.Column(
                                                 controls=[
-                                                    ft.Text("Streak", color=d_sec, size=11),
+                                                    ft.Text(L("streak_label"), color=d_sec, size=11),
                                                     ft.Text(f"🔥 {stats['streak']}", color=ORANGE, size=20, weight=ft.FontWeight.BOLD),
                                                 ],
                                                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -712,7 +1034,7 @@ def main(page: ft.Page):
                                             ),
                                             ft.Column(
                                                 controls=[
-                                                    ft.Text("Bajarildi", color=d_sec, size=11),
+                                                    ft.Text(L("completed_label"), color=d_sec, size=11),
                                                     ft.Text(f"✅ {stats['total_done']}", color=DONE_COLOR, size=20, weight=ft.FontWeight.BOLD),
                                                 ],
                                                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -725,7 +1047,7 @@ def main(page: ft.Page):
                             bgcolor=d_card, border_radius=14, padding=16,
                         ),
                         ft.Container(height=8),
-                        ft.Text(f"Yutuqlar ({len(stats['achievements'])}/{len(ACHIEVEMENTS)})",
+                        ft.Text(L("achievements_count", done=len(stats['achievements']), total=len(ACHIEVEMENTS)),
                                 color=d_sec, size=13),
                         ft.Container(height=4),
                         ft.Column(controls=ach_controls, spacing=8, scroll=ft.ScrollMode.AUTO),
@@ -751,10 +1073,14 @@ def main(page: ft.Page):
         ach_page_container.update()
 
     # ── Filtr ───────────────────────────────────────────────
+    filter_all_text    = ft.Text(L("filter_all"))
+    filter_active_text = ft.Text(L("filter_active"))
+    filter_done_text    = ft.Text(L("filter_done"))
+
     filter_btns = [
-        ft.TextButton("Hammasi",    data="Hammasi",    on_click=lambda e: apply_filter(e.control.data), style=ft.ButtonStyle(color=ACCENT)),
-        ft.TextButton("Aktiv",      data="Aktiv",      on_click=lambda e: apply_filter(e.control.data), style=ft.ButtonStyle(color=TEXT_SECONDARY)),
-        ft.TextButton("Bajarilgan", data="Bajarilgan", on_click=lambda e: apply_filter(e.control.data), style=ft.ButtonStyle(color=TEXT_SECONDARY)),
+        ft.TextButton(content=filter_all_text,    data="Hammasi",    on_click=lambda e: apply_filter(e.control.data), style=ft.ButtonStyle(color=ACCENT)),
+        ft.TextButton(content=filter_active_text, data="Aktiv",      on_click=lambda e: apply_filter(e.control.data), style=ft.ButtonStyle(color=TEXT_SECONDARY)),
+        ft.TextButton(content=filter_done_text,   data="Bajarilgan", on_click=lambda e: apply_filter(e.control.data), style=ft.ButtonStyle(color=TEXT_SECONDARY)),
     ]
 
     def apply_filter(f):
@@ -786,18 +1112,19 @@ def main(page: ft.Page):
                             spacing=2, expand=True,
                         ),
                         theme_icon_btn,
+                        lang_icon_btn,
                         ft.IconButton(
                             icon=ft.Icons.SEARCH_ROUNDED,
                             icon_color=TEXT_SECONDARY,
                             icon_size=22,
-                            tooltip="Qidirish",
+                            tooltip=L("search_tooltip"),
                             on_click=lambda e: toggle_search(e),
                         ),
                         ft.IconButton(
                             icon=ft.Icons.EMOJI_EVENTS_ROUNDED,
                             icon_color=YELLOW,
                             icon_size=24,
-                            tooltip="Yutuqlar",
+                            tooltip=L("achievements_tooltip"),
                             on_click=lambda e: show_achievements_screen(e),
                         ),
                     ],
@@ -845,7 +1172,7 @@ def main(page: ft.Page):
     )
 
     add_bar_icon  = ft.Icon(ft.Icons.ADD_CIRCLE_OUTLINE_ROUNDED, color=ACCENT_LIGHT, size=18)
-    add_bar_label = ft.Text("Yangi vazifa qo'shish", color=ACCENT_LIGHT, size=14)
+    add_bar_label = ft.Text(L("add_task_btn"), color=ACCENT_LIGHT, size=14)
     add_bar_inner = ft.Container(
         content=ft.Row(controls=[add_bar_icon, add_bar_label], spacing=8),
         bgcolor=ACCENT + "15", border_radius=12, padding=14,
@@ -903,7 +1230,7 @@ def main(page: ft.Page):
         height=10,
         expand=True,
     )
-    goal_num_txt  = ft.Text(f"Maqsad: {goal_num[0]} ta", color=TEXT_SECONDARY, size=12)
+    goal_num_txt  = ft.Text(L("goal_label", n=goal_num[0]), color=TEXT_SECONDARY, size=12)
 
     def refresh_goal_ui():
         done  = get_today_done()
@@ -913,12 +1240,12 @@ def main(page: ft.Page):
 
         goal_bar_fill.width  = max(0, width)
         goal_bar_fill.bgcolor = DONE_COLOR if pct >= 1.0 else ACCENT
-        goal_done_txt.value  = f"✅ {done}/{goal} ta bajarildi"
+        goal_done_txt.value  = L("goal_done", done=done, goal=goal)
         goal_pct_txt.value   = f"{int(pct*100)}% — " + (
-            "🎉 Maqsadga yetdingiz!" if pct >= 1.0 else
-            f"{goal - done} ta qoldi"
+            L("goal_reached") if pct >= 1.0 else
+            L("goal_remaining", n=goal - done)
         )
-        goal_num_txt.value   = f"Maqsad: {goal} ta"
+        goal_num_txt.value   = L("goal_label", n=goal)
         try:
             goal_bar_fill.update()
             goal_done_txt.update()
@@ -932,13 +1259,15 @@ def main(page: ft.Page):
         save_goal(goal_num[0])
         refresh_goal_ui()
 
+    goal_title_text = ft.Text(L("goal_title"), color=TEXT_PRIMARY,
+                               size=14, weight=ft.FontWeight.BOLD)
+
     goal_card = ft.Container(
         content=ft.Column(
             controls=[
                 ft.Row(
                     controls=[
-                        ft.Text("🎯 Kunlik maqsad", color=TEXT_PRIMARY,
-                                size=14, weight=ft.FontWeight.BOLD),
+                        goal_title_text,
                         ft.Container(expand=True),
                         ft.IconButton(
                             icon=ft.Icons.REMOVE_ROUNDED,
@@ -975,7 +1304,7 @@ def main(page: ft.Page):
     search_active = [False]
 
     search_field = ft.TextField(
-        hint_text="Vazifa qidiring...",
+        hint_text=L("search_hint"),
         hint_style=ft.TextStyle(color=TEXT_SECONDARY),
         color=TEXT_PRIMARY,
         bgcolor=INPUT_BG,
@@ -1051,7 +1380,7 @@ def main(page: ft.Page):
     )
 
     for item in load_tasks(page):
-        t = Task(
+        loaded_task = Task(
             task_name   = item["name"],
             task_delete = delete_task,
             on_change   = persist,
@@ -1060,8 +1389,9 @@ def main(page: ft.Page):
             category    = item.get("category", "Umumiy"),
             priority    = item.get("priority", "Oddiy"),
             due_date    = item.get("due_date"),
+            lang        = current_lang[0],
         )
-        tasks_list.controls.append(t)
+        tasks_list.controls.append(loaded_task)
 
     goal_placeholder.content = goal_card.content
     goal_placeholder.bgcolor       = goal_card.bgcolor
@@ -1069,6 +1399,85 @@ def main(page: ft.Page):
     goal_placeholder.padding       = goal_card.padding
     goal_placeholder.border        = goal_card.border
     update_counts()
+    def refresh_all_text():
+        """Til o'zgartirilganda barcha ko'rinadigan matnlarni yangilash"""
+        lang = current_lang[0]
+
+        # Sarlavhalar
+        ach_title_text.value = t(lang, "achievements_title")
+
+        # Statistika
+        level_text.value   = t_level(lang, get_level_index(stats["xp"]))
+        update_counts()
+
+        # Filtr tugmalari (matnini yangilaymiz, data kalitlari o'zgarmaydi)
+        filter_all_text.value    = t(lang, "filter_all")
+        filter_active_text.value = t(lang, "filter_active")
+        filter_done_text.value   = t(lang, "filter_done")
+        filter_all_text.update()
+        filter_active_text.update()
+        filter_done_text.update()
+
+        # Add bar
+        add_bar_label.value = t(lang, "add_task_btn")
+        add_bar_label.update()
+
+        # Forma elementlari
+        form_title_text.value = t(lang, "new_task_title")
+        form_cat_label.value  = t(lang, "category_label")
+        form_pri_label.value  = t(lang, "priority_label")
+        form_due_label.value  = t(lang, "due_label")
+        form_cancel_text.value = t(lang, "cancel_btn")
+        form_add_text.value    = t(lang, "add_btn")
+        name_field.hint_text  = t(lang, "task_name_hint")
+        due_field.hint_text   = t(lang, "due_not_set")
+        form_title_text.update()
+        form_cat_label.update()
+        form_pri_label.update()
+        form_due_label.update()
+        form_cancel_btn.update()
+        form_add_btn.update()
+        name_field.update()
+        due_field.update()
+
+        # Dropdown options qayta yaratamiz (kategoriya/muhimlik tarjimasi)
+        cat_dropdown.options = [
+            ft.dropdown.Option(k, f"{v} {t_cat(lang, k)}") for k, v in CATEGORIES.items()
+        ]
+        pri_dropdown.options = [
+            ft.dropdown.Option(k, f"{v['icon']} {t_pri(lang, k)}") for k, v in PRIORITIES.items()
+        ]
+        cat_dropdown.update()
+        pri_dropdown.update()
+
+        # Qidiruv
+        search_field.hint_text = t(lang, "search_hint")
+        search_field.update()
+
+        # Kunlik maqsad
+        goal_title_text.value = t(lang, "goal_title")
+        goal_title_text.update()
+        refresh_goal_ui()
+
+        # Barcha vazifa kartalarini joriy tilga moslab qaytadan yaratamiz
+        rebuilt = []
+        for task in tasks_list.controls:
+            new_t = Task(
+                task_name=task.task_name,
+                task_delete=delete_task,
+                on_change=persist,
+                created_at=task.created_at,
+                is_done=task.is_done,
+                category=task.category,
+                priority=task.priority,
+                due_date=task.due_date,
+                lang=lang,
+            )
+            rebuilt.append(new_t)
+        tasks_list.controls = rebuilt
+
+        page.update()
+
     refresh_stats_ui()
     refresh_goal_ui()
     page.update()
