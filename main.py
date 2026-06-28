@@ -68,6 +68,7 @@ TR = {
         "category_label": "Kategoriya",
         "priority_label": "Muhimlik",
         "due_label": "Muddat (ixtiyoriy)",
+        "time_label": "Vaqt tanlash",
         "due_not_set": "Sana tanlanmagan",
         "cancel_btn": "Bekor",
         "add_btn": "✓ Qo'shish",
@@ -126,6 +127,7 @@ TR = {
         "category_label": "Категория",
         "priority_label": "Приоритет",
         "due_label": "Срок (необязательно)",
+        "time_label": "Выбрать время",
         "due_not_set": "Дата не выбрана",
         "cancel_btn": "Отмена",
         "add_btn": "✓ Добавить",
@@ -184,6 +186,7 @@ TR = {
         "category_label": "Category",
         "priority_label": "Priority",
         "due_label": "Due date (optional)",
+        "time_label": "Pick time",
         "due_not_set": "No date selected",
         "cancel_btn": "Cancel",
         "add_btn": "✓ Add",
@@ -397,14 +400,21 @@ class Task(ft.Container):
 
         if self.due_date:
             try:
-                due  = datetime.strptime(self.due_date, "%Y-%m-%d").date()
+                # due_date "YYYY-MM-DD" yoki "YYYY-MM-DD HH:MM" bo'lishi mumkin
+                date_part = self.due_date.split(" ")[0]
+                time_part = self.due_date.split(" ")[1] if " " in self.due_date else None
+
+                due  = datetime.strptime(date_part, "%Y-%m-%d").date()
                 diff = (due - date.today()).days
+
+                time_suffix = f" {time_part}" if time_part else ""
+
                 if diff < 0:
                     dc, dl = DELETE_COLOR, t(self.lang, "overdue", n=abs(diff))
                 elif diff == 0:
-                    dc, dl = YELLOW, t(self.lang, "due_today")
+                    dc, dl = YELLOW, t(self.lang, "due_today") + time_suffix
                 elif diff == 1:
-                    dc, dl = YELLOW, t(self.lang, "due_tomorrow")
+                    dc, dl = YELLOW, t(self.lang, "due_tomorrow") + time_suffix
                 else:
                     dc, dl = TEXT_SECONDARY, f"📅 {self.due_date}"
                 tag_controls.append(
@@ -808,6 +818,19 @@ def main(page: ft.Page):
         expand=True,
     )
 
+    # Tanlangan sana va vaqtni alohida saqlaymiz, due_field faqat ko'rsatish uchun
+    due_state = {"date": None, "time": None}
+
+    def rebuild_due_field():
+        """due_state ga qarab due_field matnini yig'adi: YYYY-MM-DD HH:MM yoki faqat YYYY-MM-DD"""
+        if due_state["date"] and due_state["time"]:
+            due_field.value = f"{due_state['date']} {due_state['time']}"
+        elif due_state["date"]:
+            due_field.value = due_state["date"]
+        else:
+            due_field.value = ""
+        due_field.update()
+
     def on_date_picked(e):
         try:
             if date_picker.value:
@@ -817,10 +840,19 @@ def main(page: ft.Page):
                 # Buni mahalliy taqvim kuniga qaytarish uchun bir kun qo'shamiz.
                 from datetime import timedelta
                 d_fixed = d + timedelta(days=1)
-                due_field.value = f"{d_fixed.year:04d}-{d_fixed.month:02d}-{d_fixed.day:02d}"
-                due_field.update()
+                due_state["date"] = f"{d_fixed.year:04d}-{d_fixed.month:02d}-{d_fixed.day:02d}"
+                rebuild_due_field()
         except Exception as ex:
             print("DATE PICKER ERROR:", ex)
+
+    def on_time_picked(e):
+        try:
+            if time_picker.value:
+                tm = time_picker.value
+                due_state["time"] = f"{tm.hour:02d}:{tm.minute:02d}"
+                rebuild_due_field()
+        except Exception as ex:
+            print("TIME PICKER ERROR:", ex)
 
     date_picker = ft.DatePicker(
         first_date=date.today(),
@@ -829,13 +861,23 @@ def main(page: ft.Page):
     )
     page.overlay.append(date_picker)
 
+    time_picker = ft.TimePicker(
+        on_change=on_time_picked,
+    )
+    page.overlay.append(time_picker)
+
     def open_date_picker(e):
         date_picker.open = True
         page.update()
 
+    def open_time_picker(e):
+        time_picker.open = True
+        page.update()
+
     def clear_due_date(e):
-        due_field.value = ""
-        due_field.update()
+        due_state["date"] = None
+        due_state["time"] = None
+        rebuild_due_field()
 
     due_field_row = ft.Row(
         controls=[
@@ -846,6 +888,13 @@ def main(page: ft.Page):
                 icon_size=20,
                 tooltip=L("due_label"),
                 on_click=open_date_picker,
+            ),
+            ft.IconButton(
+                icon=ft.Icons.ACCESS_TIME_ROUNDED,
+                icon_color=ACCENT_LIGHT,
+                icon_size=20,
+                tooltip=L("time_label"),
+                on_click=open_time_picker,
             ),
             ft.IconButton(
                 icon=ft.Icons.CLOSE_ROUNDED,
@@ -875,10 +924,15 @@ def main(page: ft.Page):
     def add_task(e):
         val = name_field.value.strip()
         if not val:
-            name_field.error_text = L("name_required")
+            name_field.error_text  = L("name_required")
+            name_field.border_color = DELETE_COLOR
+            name_field.focused_border_color = DELETE_COLOR
             name_field.update()
+            name_field.focus()
             return
-        name_field.error_text = None
+        name_field.error_text  = None
+        name_field.border_color = DIVIDER_COLOR
+        name_field.focused_border_color = ACCENT_LIGHT
         new_task = Task(
             task_name   = val,
             task_delete = delete_task,
@@ -900,7 +954,11 @@ def main(page: ft.Page):
         if show:
             name_field.value = ""
             due_field.value  = ""
-            name_field.error_text = None
+            due_state["date"] = None
+            due_state["time"] = None
+            name_field.error_text  = None
+            name_field.border_color = DIVIDER_COLOR
+            name_field.focused_border_color = ACCENT_LIGHT
             cat_dropdown.value = "Umumiy"
             pri_dropdown.value = "Oddiy"
         form_panel.update()
